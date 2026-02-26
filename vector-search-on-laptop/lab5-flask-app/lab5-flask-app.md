@@ -317,7 +317,7 @@ This lab assumes you have:
     </copy>
     ```
 
-## Task 2: Create the HTML Templates
+## Task 2: Download the HTML Templates
 
 1. Download the templates into `~/hero/webapp/templates/`:
 
@@ -373,13 +373,60 @@ This lab assumes you have:
 
 7. To stop the Flask server, press **Ctrl+C** in the terminal running the server.
 
-    > **Note:** The Flask development server is for local testing only. For production deployments, use a WSGI server such as Gunicorn. To restart the server later without restarting the containers, simply run the same `podman exec -it python-runner python /workshop/webapp/app.py` command again.
+## Task 4: Container Maintenance
+
+Use these commands on your laptop to manage the containers created in earlier labs.
+
+### Stop the containers
+
+```bash
+<copy>podman stop python-runner oracle-ai-db</copy>
+```
+
+### Start the containers again
+
+```bash
+<copy>podman start oracle-ai-db python-runner</copy>
+```
+
+### Remove the containers
+
+> **Note:** Removing containers does not delete your images, but it will remove container state. If you want to keep your data, make sure you have a named volume or host mount.
+
+```bash
+<copy>podman rm -f python-runner oracle-ai-db</copy>
+```
+
+### Remove the network (optional)
+
+If you created a custom Podman network in earlier labs, remove it after stopping and removing the containers.
+
+```bash
+<copy>podman network ls</copy>
+```
+
+```bash
+<copy>podman network rm hero-net</copy>
+```
+
+### Remove the images (optional)
+
+List images and remove the ones you created for this workshop.
+
+```bash
+<copy>podman images</copy>
+```
+
+```bash
+<copy>podman rmi hero-python oracle-ai-db</copy>
+```
+
 
 ## Learn More
 
 * [Flask Documentation](https://flask.palletsprojects.com/)
-* [Oracle AI Vector Search - Similarity Search](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/perform-exact-similarity-search.html)
-* [Oracle Vector Indexes - HNSW](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/manage-different-categories-vector-indexes.html)
+* [Oracle AI Vector Search - Similarity Search](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/perform-exact-similarity-search.html)
+
 
 ## Acknowledgements
 * **Author** - Oracle LiveLabs Team
