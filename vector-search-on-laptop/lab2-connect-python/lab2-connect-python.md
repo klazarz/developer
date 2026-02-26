@@ -164,7 +164,7 @@ This single pattern works for every lab. You edit files locally with your prefer
 ## Learn More
 
 * [python-oracledb Documentation](https://python-oracledb.readthedocs.io/)
-* [Oracle Database 23ai Vector Search](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/)
+* [Oracle Database 23ai Vector Search](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/)
 
 ## Acknowledgements
 * **Author** - Oracle LiveLabs Team

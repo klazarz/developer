@@ -391,8 +391,8 @@ This lab assumes you have:
 ## Learn More
 
 * [VECTOR_CHUNKS Function Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/chunking-and-vector-generation-functions.html)
-* [VECTOR_DISTANCE Function](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/vector_distance.html)
-* [Oracle AI Vector Search Indexes](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/manage-different-categories-vector-indexes.html)
+* [VECTOR_DISTANCE Function](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/vector_distance.html)
+
 
 ## Acknowledgements
 * **Author** - Oracle LiveLabs Team

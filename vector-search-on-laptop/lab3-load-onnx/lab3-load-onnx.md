@@ -297,9 +297,9 @@ The ONNX model is stored in `~/hero/models/` on your laptop. Oracle Database nee
 
 ## Learn More
 
-* [DBMS_VECTOR.LOAD_ONNX_MODEL Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/dbms_vector-load_onnx_model.html)
-* [VECTOR_EMBEDDING Function](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/vector_embedding.html)
-* [Oracle Pre-built ONNX Models](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/import-onnx-models-oracle-database-end-end-example.html)
+* [DBMS_VECTOR.LOAD_ONNX_MODEL Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/dbms_vector-load_onnx_model.html)
+* [VECTOR_EMBEDDING Function](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/vector_embedding.html)
+* [Oracle Pre-built ONNX Models](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/import-onnx-models-oracle-database-end-end-example.html)
 
 ## Acknowledgements
 * **Author** - Oracle LiveLabs Team

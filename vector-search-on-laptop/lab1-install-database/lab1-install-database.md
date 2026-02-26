@@ -216,7 +216,7 @@ Instead of installing Python libraries directly on your laptop, you will run all
 
 * [Oracle Database Free Container Image](https://container-registry.oracle.com)
 * [Podman Documentation](https://docs.podman.io)
-* [Oracle AI Vector Search Overview](https://docs.oracle.com/en/database/oracle/oracle-database/23/vecse/overview-ai-vector-search.html)
+* [Oracle AI Vector Search Overview](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/overview-ai-vector-search.html)
 
 ## Acknowledgements
 * **Author** - Oracle LiveLabs Team
