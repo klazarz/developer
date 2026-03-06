@@ -69,11 +69,9 @@ This lab assumes you have:
     - `--network oracle-ai-net` — Attach to the shared network (so the Python container can reach it by name)
     - `-p 1521:1521` — Map port 1521 (Oracle listener) from container to host
     - `-e ORACLE_PWD=Welcome_1234` — Set the SYS and SYSTEM passwords
-    - `-v $HOME/hero/oracle-data:/opt/oracle/oradata:Z` — Bind‑mounts your host folder into the container so the database files
-  persist. $HOME expands to your user’s home directory. The :Z relabels the folder for
-  SELinux so the container can write to it; it is needed on SELinux‑enforcing Linux and harmless elsewhere.
+    - `-v $HOME/hero/oracle-data:/opt/oracle/oradata:Z` — Bind‑mounts your host folder into the container so the database files persist. $HOME expands to your user’s home directory. The :Z relabels the folder for SELinux so the container can write to it; it is needed on SELinux‑enforcing Linux and harmless elsewhere.
 
-1. Monitor the container startup. The database takes 3–5 minutes to initialize on the first start:
+2. Monitor the container startup. The database takes 3–5 minutes to initialize on the first start:
 
     ```bash
     <copy>podman logs -f oracle-ai-db</copy>
