@@ -6,7 +6,12 @@ Welcome to **AI Vector Search on Your Laptop with Oracle AI Database Free**! In 
 
 You will start from scratch: spinning up two Podman containers: One for Oracle AI Database and one for Python. Then you will load a pre-built ONNX embedding model directly into the database, and progressively building Python scripts that load PDF documents, chunk their content, generate vector embeddings, and perform AI Vector Search. By the end, you will have a working Flask web application where you can upload any PDF and search across your document collection using natural language queries. Running Python in its own container guarantees a clean, reproducible environment: no library conflicts, no version mismatches, and no manual setup on your laptop.
 
+![](./images/arch.png "")
+
 Oracle AI Vector Search is built natively into Oracle AI Database, enabling similarity search on vectors (embeddings) alongside traditional relational data with no external vector store required. Everything lives in one database.
+
+Vectors are numeric representations of meaning. Instead of matching only exact keywords, AI models convert text (and other data types) into vectors so semantically similar content sits close together in vector space. That is why vectors are now foundational for modern AI workloads, including semantic search, retrieval-augmented generation (RAG), recommendations, and agentic systems that need fast, context-aware retrieval.
+
 
 Estimated Workshop Time: 1 hour 45 minutes
 

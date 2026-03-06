@@ -399,26 +399,26 @@ Use these commands on your laptop to manage the containers created in earlier la
 
 ### Remove the network (optional)
 
-If you created a custom Podman network in earlier labs, remove it after stopping and removing the containers.
+If you created the workshop network in earlier labs, remove it after stopping and removing the containers.
 
 ```bash
 <copy>podman network ls</copy>
 ```
 
 ```bash
-<copy>podman network rm hero-net</copy>
+<copy>podman network rm oracle-ai-net</copy>
 ```
 
 ### Remove the images (optional)
 
-List images and remove the ones you created for this workshop.
+List images and remove the ones used in this workshop.
 
 ```bash
 <copy>podman images</copy>
 ```
 
 ```bash
-<copy>podman rmi hero-python oracle-ai-db</copy>
+<copy>podman rmi python:3.11-slim container-registry.oracle.com/database/free:latest</copy>
 ```
 
 
