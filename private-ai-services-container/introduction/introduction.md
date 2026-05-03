@@ -2,7 +2,7 @@
 
 ## About this Workshop
 
-Welcome to **Build multimodal AI Vector Search using Oracle Private AI Service Container**.
+Welcome to **Build multimodal AI Vector Search using Oracle Private AI Services Container**.
 
 Oracle Private AI Services Container exists to give you modern model inference inside your own environment. You get a local model endpoint without sending your text or images to a public AI service.
 
@@ -18,17 +18,19 @@ Use each path for a different job:
 
 Compared with public embedding APIs, a private container is often the stronger enterprise choice:
 - Sensitive data does not leave your environment
-- Latency and cost are more predictable on local network paths
+- Latency is more predictable on local network paths
 - Development is less exposed to external quotas, endpoint drift, and service outages
+- There is no charge to create vectors, it is free!
 
-In the following labs you will work not only with in-database embedding but **specifically** with the Oracle Private AI Services Container to:
+In the following labs you will use JupyterLab and Oracle Private AI Services Container to:
+- learn the JupyterLab basics used throughout this workshop
 - discover available models in the Oracle Private AI Services Container
-- generate embeddings using ONXX models stored in the Oracle AI Database and via the API endpoint provided by the Oracle Private AI Services Container.
+- generate embeddings using ONNX models stored in the Oracle AI Database and via the API endpoint provided by the Oracle Private AI Services Container.
 - store vectors in Oracle AI Database
 - run cosine similarity search
-- build a simple image search app that used multimodal embedding models
+- build a simple image search app that uses multimodal embedding models
 
-Estimated Workshop Time: 60 minutes
+Estimated Workshop Time: 70 minutes
 
 ### Architecture at a Glance
 
@@ -42,6 +44,7 @@ Estimated Workshop Time: 60 minutes
 ### Objectives
 
 In this workshop, you will:
+- Get comfortable with JupyterLab notebooks and terminals
 - Validate the runtime services required for the lab
 - Generate embeddings with both database-stored ONNX models and Oracle Private AI Services Container
 - Perform semantic similarity search in Oracle AI Database 26ai

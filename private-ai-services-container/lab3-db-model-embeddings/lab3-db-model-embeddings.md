@@ -1,4 +1,4 @@
-# Lab 2: Vector Search with ONNX Model Stored in Oracle Database
+# Lab 3: Vector Search with ONNX Model Stored in Oracle Database
 
 ## Introduction
 
@@ -18,7 +18,7 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes:
-- You completed Lab 1
+- You completed Labs 1-2
 
 ## Task 1: Download the Jupyter Notebooks
 
@@ -38,11 +38,12 @@ This lab assumes:
 
     ![refresh](./images/refresh.png)
     
-    ```
-    database-model-embeddings.ipynb
-    ```
 
-    The following tasks and instructions are also available in the notebook. You can continue working from here on in the Jupyer Notebook.
+2. Double-click on **database-model-embeddings.ipynb** which is the Jupyter Notebook for this lab
+
+    ![notebook](./images/notebook.png)
+
+    Note: The following tasks and instructions are also available in the notebook. You can continue working from here on in the Jupyter Notebook.
 
 ## Task 3: Import Python Libraries
 
@@ -58,11 +59,17 @@ import oracledb
 from dotenv import dotenv_values</copy>
 ```
 
+![task3](./images/task3.png)
+
 ## Task 4: Load Database Configuration
 
 Run this cell:
 
 This cell loads your database connection settings and preferred model name from environment variables.
+
+![task 4](./images/task4.png)
+
+<details>
 
 ```python
 <copy>ENV_PATH = os.getenv('LAB_ENV_FILE', '/home/.env')
@@ -85,11 +92,17 @@ if not DB_PASSWORD:
     raise ValueError('DB password not found. Set ORACLE_PWD')</copy>
 ```
 
+</details>
+
 ## Task 5: Connect and Discover Stored Models
 
 Run this cell:
 
 This cell connects to Oracle AI Database, lists available embedding models from `USER_MINING_MODELS`, and picks the model to use for the rest of the lab. All later embedding and vector-search steps depend on selecting a valid deployed model first.
+
+![task 5](./images/task5.png)
+
+<details>
 
 ```python
 <copy>conn = oracledb.connect(user=DB_USER, password=DB_PASSWORD, dsn=DB_DSN)
@@ -116,11 +129,17 @@ if not re.match(r'^[A-Z][A-Z0-9_$#]*$', MODEL_NAME):
     raise ValueError(f'Unsafe model identifier: {MODEL_NAME}')</copy>
 ```
 
+</details>
+
 ## Task 6: Determine Embedding Dimension
 
 Run this cell:
 
 This cell performs a small probe embedding and asks the database for the vector dimension returned by the selected model. This can be relevant because the in table schema a user can specify same dimension in its `VECTOR(...)` column.
+
+![task 6](./images/task6.png)
+
+<details>
 
 ```python
 <copy>db_params = json.dumps({
@@ -139,11 +158,17 @@ EMBEDDING_DIM = int(cur.fetchone()[0])
 print('Embedding dimension:', EMBEDDING_DIM)</copy>
 ```
 
+</details>
+
 ## Task 7: Create Table and Store Embeddings
 
 Run this cell:
 
 This cell creates a demo table, embeds sample text rows, and stores both text and vectors in Oracle AI Database. Here we build the vector dataset that you will query in the similarity search step.
+
+![task 7](./images/task7.png)
+
+<details>
 
 ```python
 <copy>TABLE_NAME = 'PRIVATEAI_DOCS_DBMODEL'
@@ -185,11 +210,17 @@ conn.commit()
 print('Inserted rows:', inserted)</copy>
 ```
 
+</details>
+
 ## Task 8: Run Similarity Search
 
 Run this cell:
 
 This cell embeds the user query and compares it to stored vectors using cosine distance, then returns the top matching rows. This demonstrates the full semantic-search flow in SQL, not just exact keyword matching.
+
+![task 8](./images/task8.png)
+
+<details>
 
 ```python
 <copy>query_text = 'Which approach keeps embedding generation inside Oracle Database?'
@@ -221,6 +252,8 @@ for idx, (title, score, preview) in enumerate(rows, 1):
     print(f'   {preview}')</copy>
 ```
 
+</details>
+
 ## Task 9: Optional Cleanup
 
 Run optional cleanup:
@@ -228,8 +261,9 @@ Run optional cleanup:
 This optional cell drops the demo table so you can reset the lab and rerun from a clean state.
 
 ```python
-<copy># cur.execute(f'DROP TABLE {TABLE_NAME} PURGE')
-# conn.commit()</copy>
+<copy>
+cur.execute(f'DROP TABLE {TABLE_NAME} PURGE')
+conn.commit()</copy>
 ```
 
 Close the connection:
@@ -237,9 +271,11 @@ Close the connection:
 This final cell closes database resources. Closing cursors and connections is good practice and prevents resource leaks in longer notebook sessions.
 
 ```python
-<copy>cur.close()
+<copy>
+cur.close()
 conn.close()
-print('Connection closed.')</copy>
+print('Connection closed.')
+</copy>
 ```
 
 ## Learn More

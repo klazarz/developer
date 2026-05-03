@@ -1,4 +1,4 @@
-# Lab 5: Optional Next Steps
+# Lab 6: Optional Next Steps
 
 ## Introduction
 
@@ -23,12 +23,14 @@ Estimated Time: 10 minutes
 - Enumerate `/v1/models`.
 - Regenerate vectors with different model IDs.
 - Compare retrieval quality and latency.
+- Use Lab 7 for a beginner-friendly JupyterLab walkthrough.
 
 ### Objectives
 
 In this lab, you will:
-* TODO: Add objectives
+- Identify practical extensions to the notebook and Flask patterns built in this workshop
+- Plan follow-on experiments for PDF chunking, ORDS publication, and model comparison
 
 ## Acknowledgements
 - **Author** - Oracle LiveLabs Team
-- **Last Updated By/Date** - Oracle LiveLabs Team, March 2026
+- **Last Updated By/Date** - Oracle LiveLabs Team, April 2026

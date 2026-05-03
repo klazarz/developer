@@ -1,4 +1,4 @@
-# Lab 4: Image Search App with CLIP Models using Oracle Private AI Services Container
+# Lab 5: Image Search App with CLIP Models using Oracle Private AI Services Container
 
 ## Introduction
 
@@ -32,7 +32,7 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes:
-- You completed Labs 1-3
+- You completed previous labs
 - JupyterLab is available
 - `privateai` and `aidbfree` are reachable from JupyterLab
 - The `admin` database user can connect to `aidbfree:1521/FREEPDB1`
@@ -67,16 +67,34 @@ This lab assumes:
     <copy>mkdir -p ~/image-search-lab/templates</copy>
     ```
 
-    Create `~/image-search-lab/app.py` with the following code:
+2. Create `~/image-search-lab/app.py` with the following code:
 
-    `app.py` is the full lab application. It provides the Flask web UI, loads image files, generates embeddings, stores vectors and image bytes in Oracle AI Database, and runs top-K similarity search when a user submits a query.
+    ```bash
+    <copy>
+    touch ~/image-search-lab/app.py
+    </copy>
+    ```
 
-    Private AI Services Container integration points in this file:
+3. Verify folders & files:
+
+
+    ![folders](./images/folders.png)
+
+   
+4. `app.py` is the full lab application. It provides the Flask web UI, loads image files, generates embeddings, stores vectors and image bytes in Oracle AI Database, and runs top-K similarity search when a user submits a query.
+ 
+5. Get familiar with the following Private AI Services Container integration points and functions in this file:
     - `PRIVATEAI_BASE_URL` and `PRIVATEAI_EMBED_URL` define the Private AI endpoint (`http://privateai:8080/v1/embeddings`).
     - `_embed_with_privateai(...)` calls the Private AI `/v1/embeddings` API with `requests.post(...)`.
     - In `_load_images_into_db(...)`, each image is base64-encoded and sent with `IMAGE_MODEL_ID` (`clip-vit-base-patch32-img`) to create image embeddings.
     - In `_search_images(...)`, the query text is sent with `TEXT_MODEL_ID` (`clip-vit-base-patch32-txt`) so text and image vectors can be compared in the same vector space.
 
+6. Double-click `app.py` in the file browser and paste the following code:
+
+    ![apppy](./images/apppy.png)
+
+    <details>
+    <summary>_**Click here for app.py code**_</summary>
     ```python
     <copy>
     import base64
@@ -369,16 +387,21 @@ This lab assumes:
         APP.run(host="0.0.0.0", port=5500, debug=True)
     </copy>
     ```
+    </details>
 
-2. Open a terminal and run the following command to copy the `index.html` into the templates folder:
+7. Open a terminal and run the following command to copy the `index.html` into the templates folder:
 
     In Flask, a template file defines the HTML page rendered by `render_template(...)`. This `index.html` template controls the app UI, including the load/search forms and the results grid.
 
     ```bash
     <copy>
-    curl -fsSL "https://raw.githubusercontent.com/oracle-livelabs/developer/main/private-ai-services-container/lab4-flask-image-search/files/templates/index.html" -o ~/image-search-lab/templates/index.html
+    curl -fsSL "https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/ai-ml-library/privateaiservices/index.html" -o ~/image-search-lab/templates/index.html
     </copy>
     ```
+
+8. Your folders and files should look like this:
+
+    ![final](./images/final.png)
 
 ## Task 3: Start the Flask App
 
@@ -391,13 +414,13 @@ This lab assumes:
 
 ## Task 4: Open the Web UI
 
-1. Open the Flask app directly:
+1. Open the Flask app directly. Find the following in the output
 
     ```text
-    💥💥 CLICK HERE 💥💥 Open in browser: http://[public IP]:5500/ 💥💥 CLICK HERE 💥💥
+    Open in browser: http://[public IP]:5500/
     ```
 
-    ![Start](./images/startapp.png)
+    ![Start](./images/openapp.png)
 
 ## Task 5: Load Images and Build Embeddings
 
@@ -406,8 +429,10 @@ This lab assumes:
     2. Click **Load + Embed Images**.
     3. Wait for completion message with inserted/skipped counts.
 
-This step generates image embeddings with:
-- `clip-vit-base-patch32-img`
+    This step generates image embeddings with:
+    - `clip-vit-base-patch32-img`
+  
+    ![embedd](./images/frontend.png)
 
 ## Task 6: Search with Text
 
@@ -429,6 +454,7 @@ This step generates image embeddings with:
     - The displayed `similarity` value is already calculated as `1 - VECTOR_DISTANCE(...)`.
 
     ![Final app](./images/app.png)
+
 
 ## Task 7: Clean Up Database Objects
 

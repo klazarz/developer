@@ -1,4 +1,4 @@
-# Lab 3: Vector Search with Oracle Private AI Services Container
+# Lab 4: Vector Search with Oracle Private AI Services Container
 
 ## Introduction
 
@@ -23,7 +23,7 @@ In this lab, you will:
 ### Prerequisites
 
 This lab assumes:
-- You completed Lab 1
+- You completed Labs 1-2
 - JupyterLab is available
 - `/home/.env` contains your DB credentials
 - Private AI container is reachable as `http://privateai:8080`
@@ -48,7 +48,9 @@ This lab assumes:
     privateai-container-embeddings.ipynb
     ```
 
-    The following tasks and instructions are also available in the notebook. You can continue working from here on in the Jupyer Notebook.
+    ![notebook](./images/notebook.png)
+
+    The following tasks and instructions are also available in the notebook. You can continue working from here on in the Jupyter Notebook.
 
 
 ## Task 3: Import Python Libraries
@@ -72,6 +74,10 @@ Run this cell:
 
 This step reads database and Private AI settings from environment variables and prints the active values. It gives you a quick sanity check that the notebook is pointing to the correct services before any API or SQL calls run.
 
+![task4](./images/task4.png)
+
+<details>
+
 ```python
 <copy>ENV_PATH = os.getenv('LAB_ENV_FILE', '/home/.env')
 env = dotenv_values(ENV_PATH) if os.path.exists(ENV_PATH) else {}
@@ -93,14 +99,20 @@ print('Private AI URL:', PRIVATEAI_BASE_URL)
 print('Preferred model:', PREFERRED_MODEL)
 
 if not DB_PASSWORD:
-    raise ValueError('DB password not found. Set ORACLE_PWD)</copy>
+    raise ValueError('DB password not found. Set ORACLE_PWD')</copy>
 ```
+</details>
+
 
 ## Task 5: Validate Private AI and Choose Model
 
 Run this cell:
 
 This block checks that the Private AI service is healthy, fetches the deployed model list, filters to text-embedding-capable models, and selects one model ID. You do this now so the rest of the lab uses a model that is actually available in your environment.
+
+![task5](./images/task5.png)
+
+<details>
 
 ```python
 <copy>health = requests.get(f'{PRIVATEAI_BASE_URL}/health', timeout=20)
@@ -136,11 +148,17 @@ print()
 print('Selected model:', MODEL_ID)</copy>
 ```
 
+</details>
+
 ## Task 6: Send embedding request to REST API
 
 Run this cell:
 
 Here you send a direct embeddings request to the Private AI endpoint with sample text. The response confirms end-to-end API behavior and reveals the embedding dimension needed for the database `VECTOR` column.
+
+![task6](./images/task6.png)
+
+<details>
 
 ```python
 <copy>payload = {
@@ -164,12 +182,15 @@ EMBEDDING_DIM = len(first_vec)
 print('Returned vectors:', len(embed_json.get('data', [])))
 print('Embedding dimension:', EMBEDDING_DIM)</copy>
 ```
+</details>
 
 ## Task 7: Connect to Oracle Database
 
 Run this cell:
 
 This step opens a database session and verifies the connected user. It establishes the SQL connection required to create tables, insert vectors, and run similarity search queries.
+
+![task7](./images/task7.png)
 
 ```python
 <copy>conn = oracledb.connect(user=DB_USER, password=DB_PASSWORD, dsn=DB_DSN)
@@ -184,6 +205,10 @@ print('Connected as:', cur.fetchone()[0])</copy>
 Run this cell:
 
 This cell creates a demo table, defines Private AI embedding parameters, and inserts sample rows with vectors generated through Private AI Services Container. The result is a searchable vector dataset stored in Oracle AI Database.
+
+![task8](./images/task8.png)
+
+<details>
 
 ```python
 <copy>TABLE_NAME = 'PRIVATEAI_DOCS_CONTAINER'
@@ -232,11 +257,17 @@ conn.commit()
 print('Inserted rows:', inserted)</copy>
 ```
 
+</details>
+
 ## Task 9: Run Similarity Search
 
 Run this cell:
 
 This query converts the user question into an embedding and ranks stored rows by cosine similarity. It demonstrates semantic retrieval, where meaning-based matches can be returned even when keywords differ.
+
+![task9](./images/task9.png)
+
+<details>
 
 ```python
 <copy>query_text = 'How can I run embeddings locally and use them for semantic search?'
@@ -268,6 +299,8 @@ for idx, (title, score, preview) in enumerate(rows, 1):
     print(f'   {preview}')</copy>
 ```
 
+</details>
+
 ## Task 10: Optional Cleanup
 
 Run optional cleanup:
@@ -275,8 +308,9 @@ Run optional cleanup:
 Use this optional command to drop the demo table when you want to reset and rerun the lab from a clean state.
 
 ```python
-<copy># cur.execute(f'DROP TABLE {TABLE_NAME} PURGE')
-# conn.commit()</copy>
+<copy>
+cur.execute(f'DROP TABLE {TABLE_NAME} PURGE')
+conn.commit()</copy>
 ```
 
 Close the connection:
@@ -289,7 +323,6 @@ conn.close()
 print('Connection closed.')</copy>
 ```
 
-> **Troubleshooting:** If you see `ORA-20002` with `ORA-29273` or `ORA-24247`, the DB user is missing outbound network ACL permissions for HTTP calls to Private AI.
 
 ## Learn More
 

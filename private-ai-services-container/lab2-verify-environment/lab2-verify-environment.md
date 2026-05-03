@@ -1,8 +1,8 @@
-# Lab 1: Verify the Runtime Environment
+# Lab 2: Verify the Runtime Environment
 
 ## Introduction
 
-In this lab you verify that all the Oracle Private AI Services API endpoint is reachable on the netwokk.
+In this lab, you verify that the Oracle Private AI Services Container API endpoints are reachable on the network.
 You will also learn how to list all the models available in the container.
 All checks are executed from a **JupyterLab Terminal**.
 
@@ -25,7 +25,7 @@ This lab assumes:
 
 1. In JupyterLab, open a new terminal.
 
-    ![JL Login](./images/jl.png)
+    ![Open a terminal from the JupyterLab File menu](./images/jl.png)
 
 2. Verify that runtime service names resolve:
 
@@ -70,12 +70,14 @@ This lab assumes:
    | `all-minilm-112-v2` | `TEXT_EMBEDDINGS` | `127.13M` |  Lightweight general-purpose text embeddings. | Choose for fastest startup and lower resource usage in English-focused semantic search. |
    | `all-mpnet-base-v2` | `TEXT_EMBEDDINGS` | `415.82M` | Higher-quality English semantic embeddings. | Choose when retrieval quality matters more than model size and latency. |
    | `multilingual-e5-base` | `TEXT_EMBEDDINGS` | `1.04G` |  Multilingual semantic search across many languages. | Choose for mixed-language corpora or non-English user queries. |
-   | `multilingual-e5-large` | `TEXT_EMBEDDINGS` | `2.09G` | Large text embedding model Multilingual semantic search across many languages.. | Choose when you want strongest semantic coverage and can accept higher memory/latency cost. |
+   | `multilingual-e5-large` | `TEXT_EMBEDDINGS` | `2.09G` | Large text embedding model Multilingual semantic search across many languages. | Choose when you want strongest semantic coverage and can accept higher memory/latency cost. |
     {: title="Models deployed in Oracle Private AI Services Container"}
 
    Rule of thumb:
    - For image search: use the CLIP pair (`clip-vit-base-patch32-img` + `clip-vit-base-patch32-txt`).
    - For text-only search: start with `all-minilm-112-v2`, then move to larger models if quality needs improvement.
+   - For non-English text: start with `multilingual-e5-base` and move to `multilingual-e5-large` if you need better accuracy.
+
 
 
 ## Acknowledgements
